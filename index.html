@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incredible India – Tourist Guide (All in One)</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(135deg, #fffaf0, #fef6e4);
+      color: #333;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .header-section {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: center;
+    }
+    
+    #home-section .welcome {
+      padding: 80px 20px;
+      background: linear-gradient(0deg, rgba(0, 51, 102, 0.55), rgba(0, 51, 102, 0.55)), url("images/india-hero.jpg") center/cover no-repeat;
+      color: #fff;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    #home-section .welcome h2 { font-size: 36px; margin-bottom: 15px; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); }
+    #home-section .welcome p { font-size: 18px; max-width: 600px; margin: auto; line-height: 1.8; }
+
+    #about-section h2 { color: #8b0000; margin-bottom: 10px; }
+    #about-section section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #destinations-section h1 { color: #006400; }
+    #destinations-section .destination-card:hover { transform: translateY(-6px); }
+    #destinations-section .img-caption { position: absolute; bottom: 8px; left: 12px; background: rgba(0,0,0,0.5); color: #fff; padding: 4px 8px; border-radius:4px; font-size:14px; }
+
+    #contact-section h2 { color: #800080; margin-bottom: 15px; }
+    #contact-section form { display: flex; flex-direction: column; gap: 14px; }
+    #contact-section input, #contact-section textarea { padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
+    #contact-section button { padding: 12px; border-radius: 8px; background: linear-gradient(135deg, #800080, #a020f0); color: white; border: none; cursor: pointer; }
+    #contact-section .error { color: red; font-size: 14px; margin-top: -8px; margin-bottom: 10px; display: block; }
+
+    #quiz-section .quiz-box {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 650px;
+      margin: 20px auto;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    #quiz-section .question { margin-bottom: 12px; font-weight: bold; color: #2c3e50; font-size: 18px; }
+    #quiz-section .options { margin-bottom: 22px; padding-left: 10px; }
+    #quiz-section button[type="button"] {
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+      display: block;
+      margin: auto;
+    }
+    #quiz-section #result { margin-top: 25px; font-size: 22px; font-weight: bold; text-align: center; color: #2c3e50; }
+    #quiz-section #result img { margin-top: 18px; border-radius: 12px; max-width: 100%; height: auto; box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3); }
+    #quiz-section #info { margin-top: 12px; font-size: 16px; color: #444; text-align: center; padding: 0 15px; }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Incredible India</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto nav-pills" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab">Home</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-destinations-tab" data-bs-toggle="pill" data-bs-target="#pills-destinations" type="button" role="tab">Destinations</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab">About</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-quiz-tab" data-bs-toggle="pill" data-bs-target="#pills-quiz" type="button" role="tab">Quiz</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab">Contact</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4 tab-content" id="pills-tabContent">
+
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" tabindex="0">
+      <div id="home-section">
+        <div class="header-section">
+          <h1 class="text-primary">Incredible India – Tourist Guide</h1>
+        </div>
+        
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/tajmahal.jpg" class="d-block w-100" alt="Taj Mahal" style="height:400px;object-fit:cover;">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Taj Mahal, Agra</h5>
+                <p>The symbol of love and a UNESCO World Heritage site.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/kerala.jpg" class="d-block w-100" alt="Kerala" style="height:400px;object-fit:cover;">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Kerala Backwaters</h5>
+                <p>Backwater cruises and lush greenery.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/goa.jpg" class="d-block w-100" alt="Goa" style="height:400px;object-fit:cover;">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Goa Beaches</h5>
+                <p>Sandy beaches and vibrant nights.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+
+        <section class="welcome mt-4">
+          <h2>Welcome to Incredible India!</h2>
+          <p>Experience the magic of India’s landscapes, cultures, and traditions. Explore now!</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="pills-destinations" role="tabpanel" tabindex="0">
+      <div id="destinations-section">
+        <div class="header-section">
+          <h1 class="text-success">Popular Destinations</h1>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12 col-md-8">
+            <input id="searchBox" class="form-control" placeholder="Search destinations (e.g., Goa, Rajasthan)">
+          </div>
+          <div class="col-12 col-md-4 text-md-end mt-2 mt-md-0">
+            <small id="searchInfo" class="text-muted">Type to filter destinations</small>
+          </div>
+        </div>
+        <div id="cardsRow" class="row g-3">
+          </div>
+
+        <hr class="my-4">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="text-success">Local Tips</h4>
+            <div class="accordion" id="tipsAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    Traveling Tips & Safety
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#tipsAccordion">
+                  <div class="accordion-body">Carry a water bottle, respect local customs, and keep photocopies of important documents.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    Food & Culture
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#tipsAccordion">
+                  <div class="accordion-body">Try local dishes, ask about spice levels, and visit markets respectfully.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="pills-about" role="tabpanel" tabindex="0">
+      <div id="about-section" class="row g-4">
+        <div class="header-section">
+          <h1 class="text-danger">About Incredible India</h1>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Why Visit India?</h2>
+            <p>India is known for its diversity, history, and spirituality. From heritage sites to modern cities, every traveler finds something unique.</p>
+          </section>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Culture & Food</h2>
+            <p>Indian festivals, cuisines, and traditions vary widely from north to south and east to west, making it a land of endless discovery.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="pills-quiz" role="tabpanel" tabindex="0">
+      <div id="quiz-section">
+        <div class="header-section">
+          <h1 class="text-secondary">Which Indian Destination Suits Your Personality?</h1>
+        </div>
+        <div class="quiz-box">
+          <form id="quizForm">
+            <div class="question">1. What kind of vacation do you prefer?</div>
+            <div class="options">
+              <input type="radio" name="q1" value="goa"> Beach & Party <br>
+              <input type="radio" name="q1" value="manali"> Mountains & Adventure <br>
+              <input type="radio" name="q1" value="kerala"> Peace & Nature <br>
+              <input type="radio" name="q1" value="jaipur"> Culture & History <br>
+            </div>
+
+            <div class="question">2. What is your travel style?</div>
+            <div class="options">
+              <input type="radio" name="q2" value="goa"> Fun & Social <br>
+              <input type="radio" name="q2" value="manali"> Adventurous & Active <br>
+              <input type="radio" name="q2" value="kerala"> Relaxed & Calm <br>
+              <input type="radio" name="q2" value="jaipur"> Curious & Traditional <br>
+            </div>
+
+            <div class="question">3. Pick your ideal activity:</div>
+            <div class="options">
+              <input type="radio" name="q3" value="goa"> Nightlife & Water Sports <br>
+              <input type="radio" name="q3" value="manali"> Trekking & Skiing <br>
+              <input type="radio" name="q3" value="kerala"> Backwaters & Ayurveda <br>
+              <input type="radio" name="q3" value="jaipur"> Forts & Palaces <br>
+            </div>
+
+            <button type="button" onclick="showResult()">Submit</button>
+          </form>
+
+          <div id="result"></div>
+          <div id="info"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" tabindex="0">
+      <div id="contact-section" class="row g-4">
+        <div class="header-section">
+          <h1 class="text-purple">Contact Us</h1>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Send us a Message</h2>
+            <form id="contactForm" novalidate>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" />
+              <small class="error" id="nameError"></small>
+
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" />
+              <small class="error" id="emailError"></small>
+
+              <label for="message">Message:</label>
+              <textarea id="message" name="message"></textarea>
+              <small class="error" id="messageError"></small>
+
+              <button type="submit">Send</button>
+              <p id="formSuccess" style="color: green; font-weight: bold; margin-top: 10px;"></p>
+            </form>
+          </section>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Our Office</h2>
+            <p>Rajkot, Gujarat, India</p>
+            <p>Email: support@incredibleindia.com</p>
+            <p>Phone: +91 9714423225</p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+  </div> <div class="modal fade" id="imgModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="modalTitle" class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="modalImg" src="" alt="" style="max-width:100%;height:auto;">
+          <p id="modalDesc" class="mt-2 text-muted"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white mt-4">
+    <div class="container py-3 text-center small">
+      &copy; 2025 Incredible India — Tourist Guide. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var cardsRow = document.getElementById('cardsRow');
+      cardsRow.innerHTML = `
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card destination-card" data-title="Taj Mahal" onclick="openPreview('tajmahal.jpg','Taj Mahal','Iconic white-marble mausoleum in Agra.')">
+            <div style="position:relative;overflow:hidden;height:200px;">
+              <img src="images/tajmahal.jpg" class="card-img-top" style="object-fit:cover;height:100%;width:100%;" alt="Taj Mahal">
+              <div class="img-caption">Taj Mahal</div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Taj Mahal</h5>
+              <p class="card-text">Iconic white-marble mausoleum in Agra.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card destination-card" data-title="Goa" onclick="openPreview('goa.jpg','Goa','Beaches, nightlife and Portuguese heritage.')">
+            <div style="position:relative;overflow:hidden;height:200px;">
+              <img src="images/goa.jpg" class="card-img-top" style="object-fit:cover;height:100%;width:100%;" alt="Goa">
+              <div class="img-caption">Goa</div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Goa</h5>
+              <p class="card-text">Beaches, nightlife and Portuguese heritage.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card destination-card" data-title="Kerala" onclick="openPreview('kerala.jpg','Kerala','Backwaters, Ayurveda and serene landscapes.')">
+            <div style="position:relative;overflow:hidden;height:200px;">
+              <img src="images/kerala.jpg" class="card-img-top" style="object-fit:cover;height:100%;width:100%;" alt="Kerala">
+              <div class="img-caption">Kerala</div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Kerala</h5>
+              <p class="card-text">Backwaters, Ayurveda and serene landscapes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card destination-card" data-title="Jaipur (Rajasthan)" onclick="openPreview('jaipur.jpg','Jaipur (Rajasthan)','Palaces, forts and desert culture.')">
+            <div style="position:relative;overflow:hidden;height:200px;">
+              <img src="images/jaipur.jpg" class="card-img-top" style="object-fit:cover;height:100%;width:100%;" alt="Jaipur (Rajasthan)">
+              <div class="img-caption">Jaipur (Rajasthan)</div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Jaipur (Rajasthan)</h5>
+              <p class="card-text">Palaces, forts and desert culture.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card destination-card" data-title="Ladakh" onclick="openPreview('ladakh.jpg','Ladakh','High-altitude desert and Buddhist monasteries.')">
+            <div style="position:relative;overflow:hidden;height:200px;">
+              <img src="images/ladakh.jpg" class="card-img-top" style="object-fit:cover;height:100%;width:100%;" alt="Ladakh">
+              <div class="img-caption">Ladakh</div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Ladakh</h5>
+              <p class="card-text">High-altitude desert and Buddhist monasteries.</p>
+            </div>
+          </div>
+        </div>
+        `;
+    });
+    
+    function openPreview(img, title, desc) {
+      document.getElementById('modalImg').src = img ? 'images/'+img : img;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDesc').textContent = desc;
+      var modal = new bootstrap.Modal(document.getElementById('imgModal'));
+      modal.show();
+    }
+
+    document.addEventListener('input', function(e){
+      if (e.target && e.target.id === 'searchBox') {
+        var q = e.target.value.toLowerCase();
+        var cards = document.querySelectorAll('#destinations-section .destination-card');
+        var found = 0;
+        cards.forEach(function(c){
+          var title = c.getAttribute('data-title').toLowerCase();
+          var col = c.closest('.col-12'); 
+          if (title.indexOf(q) !== -1) { col.style.display = ''; found++; }
+          else { col.style.display = 'none'; }
+        });
+        document.getElementById('searchInfo').textContent = found ? found + ' results' : 'No results found';
+      }
+    });
+
+    function showResult() {
+      const form = document.getElementById("quizForm");
+      const resultDiv = document.getElementById("result");
+      const infoDiv = document.getElementById("info");
+
+      const q1 = form.querySelector('input[name="q1"]:checked');
+      const q2 = form.querySelector('input[name="q2"]:checked');
+      const q3 = form.querySelector('input[name="q3"]:checked');
+
+      if (!q1 || !q2 || !q3) {
+        resultDiv.innerHTML = "⚠️ Please answer all questions!";
+        infoDiv.innerHTML = "";
+        return;
+      }
+
+      const answers = [q1.value, q2.value, q3.value];
+      let counts = {};
+
+      answers.forEach(ans => {
+        counts[ans] = (counts[ans] || 0) + 1;
+      });
+
+      const maxCount = Math.max(...Object.values(counts));
+      const topDestinations = Object.keys(counts).filter(dest => counts[dest] === maxCount);
+
+      const messages = {
+        "goa": {
+          text: "🌴 You belong in Goa! Beaches, parties, and vibrant nightlife await you.",
+          info: "Goa is famous for its stunning beaches, Portuguese heritage, seafood, and nightlife. Ideal for fun-loving and social personalities.",
+          img: "images/goa.jpg"
+        },
+        "manali": { 
+          text: "🏔️ You should visit Manali! Adventure and stunning mountains are your vibe.",
+          info: "Manali offers snow-capped peaks, adventure sports like trekking and paragliding, and beautiful valleys. Perfect for adventure seekers.",
+          img: "images/ladakh.jpg" 
+        },
+        "kerala": {
+          text: "🌿 Kerala is your destination! Calm, green, and refreshing for your soul.",
+          info: "Kerala is known as 'God’s Own Country'. Famous for backwaters, houseboats, Ayurveda, and greenery — best for peace lovers.",
+          img: "images/kerala.jpg"
+        },
+        "jaipur": {
+          text: "🏰 Jaipur suits you! Rich culture, forts, and royal heritage await.",
+          info: "Jaipur, the Pink City, is known for forts, palaces, handicrafts, and Rajasthani culture. Great for those curious about history & traditions.",
+          img: "images/jaipur.jpg"
+        }
+      };
+
+      if (topDestinations.length === 1) {
+        const dest = topDestinations[0];
+        resultDiv.innerHTML = messages[dest].text +
+          "<br><img src='" + messages[dest].img + "' alt='" + dest + "'>";
+        infoDiv.innerHTML = messages[dest].info;
+      } else {
+        resultDiv.innerHTML = "🤔 It's a tie!";
+        infoDiv.innerHTML = "You seem to have multiple travel preferences! Try again to get a clear result.";
+      }
+    }
+
+
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault(); 
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("messageError").textContent = "";
+      document.getElementById("formSuccess").textContent = "";
+
+      let isValid = true;
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+      if (name === "") {
+        document.getElementById("nameError").textContent = "⚠️ Name is required.";
+        isValid = false;
+      }
+
+      if (email === "") {
+        document.getElementById("emailError").textContent = "⚠️ Email is required.";
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "⚠️ Enter a valid email address.";
+        isValid = false;
+      }
+
+      if (message === "") {
+        document.getElementById("messageError").textContent = "⚠️ Message cannot be empty.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        document.getElementById("formSuccess").textContent = "✅ Message sent successfully!";
+        document.getElementById("contactForm").reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
